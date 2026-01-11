@@ -2,7 +2,7 @@
 # RAPPORT DE PROJET : APPLICATION MULTI-TIERS « LAPIN CÂLIN »
 **Cours :** Programmation d'applications multi-tiers  
 **Enseignant :** Nicolas Marilleau  
-**Étudiant :** KASDI Oumaima 
+**Étudiant :** KASDI Oumaima  
 **Date :**  10 janvier 2026
 
 
