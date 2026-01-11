@@ -1,0 +1,7 @@
+/target/
+.settings/
+.vscode/
+captures/
+Makefile
+*.ipynb
+*.pdf
