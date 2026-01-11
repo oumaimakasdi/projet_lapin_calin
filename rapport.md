@@ -3,13 +3,13 @@
 **Cours :** Programmation d'applications multi-tiers  
 **Enseignant :** Nicolas Marilleau  
 **Étudiant :** KASDI Oumaima 
+**Date :**  10 janvier 2026
 
----
+
 
 ## 1. INTRODUCTION
 Ce projet a pour objectif la conception et l'implémentation d'une application de gestion généalogique pour un élevage de lapins papillons. Au-delà de l'aspect fonctionnel, ce travail vise à mettre en pratique les concepts fondamentaux de l'architecture multi-tiers, la gestion de la persistance des données et l'inversion de contrôle via le framework Spring Boot.
 
----
 
 ## 2. ARCHITECTURE LOGICIELLE
 L'application repose sur une **architecture 3-tiers** classique, garantissant une séparation stricte des préoccupations (*Separation of Concerns*) :
@@ -33,10 +33,8 @@ Le choix de l'identifiant `Long` et de la stratégie de génération automatique
 ### A. Inversion de Contrôle (IoC)
 Toute l'application repose sur le principe d'Inversion de Contrôle. Au lieu d'instancier manuellement nos classes, nous utilisons l'annotation **`@Autowired`**. Spring injecte automatiquement les composants nécessaires (Repositories dans les Services, Services dans les Contrôleurs) lors de la phase de **consolidation des liens**.
 
-### B. Gestion des Erreurs (Optional)
-Dans la couche Service, la manipulation des données utilise les objets **`Optional`** avec la méthode `.orElse(null)`. Cette approche permet d'éviter les erreurs de type `NullPointerException` lors de la recherche d'un parent ou d'un propriétaire qui n'existerait pas encore en base de données.
 
-### C. Flux de Données (Controller)
+### B. Flux de Données (Controller)
 Les contrôleurs gèrent les requêtes HTTP :
 *   **`@GetMapping`** : Utilisé pour l'affichage de la liste et du formulaire.
 *   **`@PostMapping`** : Utilisé pour sécuriser l'envoi des données lors de l'enregistrement.
@@ -52,7 +50,7 @@ L'architecture est distribuée sur deux containers :
 L'interopérabilité entre les deux est assurée par la configuration du `datasource` dans le fichier `application.properties`, pointant vers le nom du service Docker au lieu de `localhost`.
 
 ## 6. RÉSULTATS (DÉMONSTRATION)
-On a tout d'abord la page d'accueil poour choisir l'accès a la dage de gestion des lapins ou des propriétaires :
+On a tout d'abord la page d'accueil pour choisir l'accès a la dage de gestion des lapins ou des propriétaires :
  ![accueil](./captures/accueil.png)
 
 ### 6.1 Liste des Propriétaires (Question 2)
@@ -69,8 +67,9 @@ Le tableau affiche les liens de parenté et les propriétaires. Le bouton "Suppr
 Pour contourner ce problème, une solution serait de créer deux entités à part (par exemple 'LienPère' et 'LienMère'). Cela permettrait d'enregistrer tous les lapins d'abord, puis de créer les liens de parenté plus tard, une fois que tous les IDs sont connus."
 
 ### 6.3 Formulaire d'Ajout (Question 6)
- ![formulaire_lapin](./captures/formulaire_lapin.png)
- L'interface propose des listes déroulantes dynamiques récupérant les données des autres tables (Parents et Propriétaires).
+ L'interface propose des listes déroulantes dynamiques récupérant les données des autres tables (Parents et Propriétaires) :
+  ![formulaire_lapin](./captures/formulaire_lapin.png)
+
 
 ## 7. CONCLUSION
 Ce projet a permis de maîtriser le flux complet d'une application multi-tiers moderne. L'utilisation combinée de Spring Boot, JPA et Docker offre une solution scalable, facile à maintenir et prête pour un déploiement en production.
