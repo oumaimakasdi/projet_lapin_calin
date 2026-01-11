@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+    <h2>Ajouter un Lapin</h2>
+
+    <form action="/lapins/enregistrer" method="post">
+        Nom: <input type="text" name="nom" required><br>
+        
+        Père: <select name="idPapa">
+            <option value="">-- Inconnu --</option>
+            <option th:each="p : ${TousLesLapins}" th:value="${p.IDLapin}" th:text="${p.IDLapin}"></option>
+        </select><br>
+
+        Mère: <select name="idMaman">
+            <option value="">-- Inconnue --</option>
+            <option th:each="m : ${TousLesLapins}" th:value="${m.IDLapin}" th:text="${m.IDLapin}"></option>
+        </select><br>
+
+        Propriétaire: <select name="idProprio" required>
+            <option th:each="prop : ${proprietaires}" th:value="${prop.IDUser}" th:text="${prop.IDUser}"></option>
+        </select><br>
+
+        <input type="submit" value="Enregistrer">
+    </form>
+    <br>
+    <a href="/lapins">Annuler</a>
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+    <h2>Liste des Lapins</h2>
+
+    <div th:if="${param.alert != null and param.alert[0] == 'deleteError'}" style="background:#f8d7da;color:#842029;padding:10px;border-radius:4px;margin:10px 0;">
+        <strong>Erreur :</strong>
+        <span>Erreur lors de la suppression du lapin. Il peut être référencé comme parent.</span>
+    </div>
+
+    <table border="1">
+        <tr>
+            <th>ID</th><th>Nom</th><th>Père</th><th>Mère</th><th>Propriétaire</th><th>Action</th>
+        </tr>
+        <tr th:each="l : ${TousLesLapins}">
+            <td th:text="${l.IDLapin}"></td>
+            <td th:text="${l.nom}"></td>
+            <td th:text="${l.papa != null ? l.papa.IDLapin : '-'}"></td>
+            <td th:text="${l.maman != null ? l.maman.IDLapin : '-'}"></td>
+            <td th:text="${l.proprietaire.IDUser}"></td>
+            <td>
+                <a th:href="@{/lapins/deleteLapin/{id}(id=${l.IDLapin})}">Supprimer</a>
+            </td>
+        </tr>
+    </table>
+    <br>
+    <a href="/lapins/ajouter">Ajouter un nouveau lapin</a>
+    <a href="/">⬅️ Retour à la liste</a>
+</body>
+</html>

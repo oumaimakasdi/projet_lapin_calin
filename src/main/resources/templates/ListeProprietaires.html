@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+    <h2>Liste des Propriétaires</h2>
+
+    <!-- Alert shown when deletion failed: ?alert=deleteError&id=3 -->
+    <div th:if="${param.alert != null and param.alert[0] == 'deleteError'}" style="background:#f8d7da;color:#842029;padding:10px;border-radius:4px;margin:10px 0;">
+        <strong>Erreur :</strong>
+        <span>Erreur lors de la suppression du propriétaire. Il peut avoir des lapins associés.</span>
+    </div>
+    <table border="1">
+        <tr>
+            <th>ID</th><th>Prénom</th><th>Nom</th><th>Adresse</th><th>Action</th>
+        </tr>
+        <tr th:each="p : ${tousLesProprios}">
+            <td th:text="${p.IDUser}"></td>
+            <td th:text="${p.prenom}"></td>
+            <td th:text="${p.nom}"></td>
+            <td th:text="${p.adresse}"></td>
+            <td><a th:href="@{/proprietaires/supprimer/{id}(id=${p.IDUser})}">Supprimer</a></td>
+        </tr>
+    </table>
+    <a href="/proprietaires/ajouter">Ajouter un humain</a>
+    <a href="/">⬅️ Retour à la liste</a>
+</body>
+</html>
